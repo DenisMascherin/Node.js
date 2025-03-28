@@ -1,16 +1,18 @@
-const http = require ('http');
+const express = require("express");
 
-const host = '127.0.0.1';
+const server = express();
+
 const port = 3000;
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World\n');
+server.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+server.get("/json", (req, res) => {
+  const rispostaJson = { "nome": "Pippo" };
 
+  res.send(rispostaJson);
 });
 
-server.listen(port, host, () => {
-    console.log(`Server running at http://${host}:${port}/`);
-});
-
+server.listen(port, () =>
+  console.log(`Server running at http://localhost:${port}/`)
+);
